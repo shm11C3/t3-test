@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/next/Dockerfile
+    tty: true
+    ports:
+      - 8080:3000
+    volumes:
+      - ./app:/app
+    #command: sh -c "npm run dev"
+    environment:
+      - WATCHPACK_POLLING=true
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
